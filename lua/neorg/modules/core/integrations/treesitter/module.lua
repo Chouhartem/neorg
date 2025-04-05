@@ -919,6 +919,9 @@ module.public = {
             if source == 0 then
                 source = vim.api.nvim_get_current_buf()
             end
+            if not vim.api.nvim_buf_is_loaded(source) then
+                vim.api.nvim_buf_call(source, vim.cmd.edit)
+            end
             norg_parser = vim.treesitter.get_parser(source, "norg")
             iter_src = source
         end
